@@ -7,13 +7,8 @@ import Employees from "./Employees";
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      num: 0
-    };
   }
-  componentDidMount() {
-    this.props.load(this.state.num);
-  }
+
   render() {
     return (
       <HashRouter>
@@ -24,12 +19,4 @@ class App extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    load: num => {
-      dispatch(loadEmployees(num));
-    }
-  };
-};
-
-export default connect(null, mapDispatchToProps)(App);
+export default connect(null, null)(App);

@@ -11,7 +11,7 @@ class Employees extends Component {
     };
   }
   componentDidMount() {
-    this.props.employees = {};
+    this.props.employees = null;
     this.props.load(this.state.num);
   }
   //     componentDidUpdate(prevprops, prevState, snapshot) {
@@ -59,7 +59,8 @@ class Employees extends Component {
                 <Link
                   onClick={() => {
                     this.setState({ num: _num });
-                    return this.componentDidMount();
+                    this.props.employees = null;
+                    this.props.load(this.state.num);
                   }}
                   to={`/${_num}`}
                 >
