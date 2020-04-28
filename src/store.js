@@ -9,6 +9,7 @@ const LOAD_EMPLOYEES = "LOAD_EMPLOYEES";
 
 const employeesReducer = (state = {}, action) => {
   if (action.type === LOAD_EMPLOYEES) {
+    state = initialState;
     return action.employees;
   }
   return state;
@@ -23,8 +24,6 @@ const store = createStore(
   applyMiddleware(thunks, createLogger({ collapsed: true }))
 );
 
-export default store;
-
 const _loadEmployees = employees => {
   return {
     type: LOAD_EMPLOYEES,
@@ -32,15 +31,16 @@ const _loadEmployees = employees => {
   };
 };
 
-const loadEmployees = (num) => {
+const loadEmployees = num => {
   return async dispatch => {
     const response = await axios.get(`/api/employees/${num}`);
-    // console.log(response);
+    console.log(response.data, "in loadEmployees");
     const actionToDispatch = _loadEmployees(response.data);
-    return dispatch(actionToDispatch);
+    dispatch(actionToDispatch);
   };
 };
 
-console.log(store.getState(), 'getstate');
+console.log(store.getState(), "getstate");
 
+export default store;
 export { loadEmployees };

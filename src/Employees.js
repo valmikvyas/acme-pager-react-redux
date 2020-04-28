@@ -11,14 +11,15 @@ class Employees extends Component {
     };
   }
   componentDidMount() {
+    this.props.employees = {};
     this.props.load(this.state.num);
   }
-  //   componentDidUpdate(prevprops, prevState, snapshot) {
-  //       console.log(prevState, 'prevstate');
-  //     if (this.prevState === this.state) {
-  //       this.props.load(this.state.num);
+  //     componentDidUpdate(prevprops, prevState, snapshot) {
+  //         console.log(prevState, 'prevstate');
+  //       if (this.prevState !== this.state) {
+  //         this.props.load(this.state.num);
+  //       }
   //     }
-  //   }
   render() {
     const { employees } = this.props;
     console.log(this, "this in render");
@@ -56,9 +57,9 @@ class Employees extends Component {
             {pages.map(_num => {
               return (
                 <Link
-                  onClick={() => {\
+                  onClick={() => {
                     this.setState({ num: _num });
-                    this.props.load(this.state.num);
+                    return this.componentDidMount();
                   }}
                   to={`/${_num}`}
                 >
